@@ -1,0 +1,255 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="AIchatbot.css" />
+    <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      background-color: #e6ede6;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 70px;
+    }
+    
+    .video-container {
+      width: 70%;
+      margin-right: 20px;
+      position: relative;
+    }
+    
+    .chat-container {
+      width: 30%;
+      background-color: #f7efe5;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    #chat-window {
+      height: 70vh;
+      overflow-y: scroll;
+    }
+    
+    #chat-form {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    #chat-input {
+      flex-grow: 1;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    button[type="submit"] {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #5b4188;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
+    .main-title {
+      font-size: 1.5rem;
+      text-align: center;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      margin-bottom: 0.5rem;
+      color: #5b4188;
+      font-style: italic;
+      animation: moveText 1s linear;
+    }
+    
+    @keyframes moveText {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    
+    .search-bar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-bar input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      width: 200px;
+    }
+    
+    .search-bar button[type="button"] {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #5b4188;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    
+    .switch-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .switch-label {
+      margin-right: 10px;
+    }
+    
+    .switch-label input[type="checkbox"] {
+      display: none;
+    }
+    
+    .switch-label .slider {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch-label .slider:before {
+      content: "";
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: #fff;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    
+    .switch-label input[type="checkbox"]:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .switch-label .slider.round {
+      border-radius: 34px;
+    }
+    
+    .switch-label .slider.round:before {
+      border-radius: 50%;
+    }
+    
+    .upload-container {
+      position: absolute;
+      top: 20%;
+      right: 26px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+    }
+    
+    .upload-container input[type="file"] {
+      display: none;
+    }
+    
+    .upload-container label {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #5b4188;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .upload-container label:hover {
+      background-color: #674188;
+    }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+      <div class="video-container">
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search for crop yielding techniques" />
+          <button type="button" id="search-button">Search</button>
+        </div>
+        <iframe id="video-player" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        <div class="video-controls">
+          <button onclick="playPreviousVideo()">Previous</button>
+          <button onclick="playNextVideo()">Next</button>
+        </div>
+      </div>
+      <div class="chat-container">
+        <div class="main-title">Welcome to AI For Africa's Food</div>
+        <div class="switch-container">
+          <label class="switch-label">
+            <input type="checkbox" id="switch" />
+            <span class="slider round"></span>
+          </label>
+          <span id="switch-label-text">GPT 3.5 is on</span>
+        </div>
+        <div id="chat-window"></div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" autocomplete="off" placeholder="Type your message here" required />
+          <button type="submit">Send</button>
+        </form>
+        <div class="upload-container">
+          <input type="file" id="upload-input" accept="image/*" />
+          <label for="upload-input">Upload Picture</label>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      var videos = [
+        "https://www.youtube.com/embed/3JigXb9KXqI",
+        "https://www.youtube.com/embed/z1BWxDEu0P0",
+        "https://www.youtube.com/embed/YDcakKDJWv0",
+        "https://www.youtube.com/embed/q83gVI5MKj0",
+        "https://www.youtube.com/embed/4wZhS4sfcUY",
+        "https://www.youtube.com/embed/4wZhS4sfcUY",
+        "https://www.youtube.com/embed/-1zSHaaub6Y"
+      ];
+      var currentVideoIndex = 0;
+      var videoPlayer = document.getElementById("video-player");
+      var switchLabel = document.getElementById("switch-label-text");
+    
+      function playVideo(videoUrl) {
+        videoPlayer.src = videoUrl;
+      }
+    
+      function playNextVideo() {
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        playVideo(videos[currentVideoIndex]);
+      }
+    
+      function playPreviousVideo() {
+        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+        playVideo(videos[currentVideoIndex]);
+      }
+    
+      var switchElement = document.getElementById("switch");
+      switchElement.addEventListener("change", function() {
+        if (this.checked) {
+          switchLabel.textContent = "Pest Detecting GPT is on";
+        } else {
+          switchLabel.textContent = "GPT 3.5 is on";
+        }
+      });
+    </script>
+    <script>AIchatbot.js</script>
+
+    </body>
+    </html>
