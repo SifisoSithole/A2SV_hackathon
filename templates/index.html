@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>A4AF</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         * {
             margin: 0;
@@ -26,11 +26,11 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="home.html">HOME</a></li>
-                    <li><a href="about.html">AI BOT</a></li>
+                    <li><a href="{{ url_for('root') }}">HOME</a></li>
+                    <li><a href="{{ url_for('about')}}">AI BOT</a></li>
                     <li><a href="#SERVICES">SERVICES</a></li>
                     <li><a href="#COMMUNITY">COMMUNITY</a></li>
-                    <li><a href="#LOGIN">LOGIN</a></li>
+                    <li><a href="{{ url_for('login_page') }}">LOGIN</a></li>
                 </ul>
             </div>
             <div class="search">

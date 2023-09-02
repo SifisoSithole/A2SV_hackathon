@@ -50,7 +50,7 @@ class Storage:
         except Exception:
             return False
 
-    def get_user(self, email: str, user_id=None) -> Dict[str, Any]:
+    def get_user(self, email=None, user_id=None) -> Dict[str, Any]:
         """
         return user matching email
 

@@ -1,5 +1,16 @@
 from models.db import Storage
+from functools import wraps
 import bcrypt
+
+def login_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        session_id = request.cookies.get('session_id')
+        if session_id not in session:
+            return redirect(url_for('root'))
+        return func(*args, **kwargs)
+    return wrapper
+
 
 class AuthManager:
     def __init__(self):
