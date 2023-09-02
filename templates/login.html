@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Login</title>
+    <title>Webpage Design</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            width: 100%;
+            background: url("miv4dg_9bfe5ff5dcb74e7d0a949641becd2b81b853b2d7(1).jpg");
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <form class="login-form" action="{{ url_for('auth_views.login') }}" method="POST">
-            <h1>Login</h1>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">A4AF</h2>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+        </div>
+        <div class="content">
+            <h1><br></h1>
+            <div class="form">
+                <h2>Login Here</h2>
+                <input type="email" name="email" placeholder="Enter Email Here">
+                <input type="password" name="" placeholder="Enter Password Here">
+                <button class="btnn" id="loginButton">Login</button>
+                <p class="link">Don't have an account<br>
+                    <a href="#" target="_blank">Sign up</a> here</a>
+                </p>
+                <p class="liw">Log in with</p>
+                <div class="icons">
+                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                </div>
             </div>
-            <button type="submit">Login</button>
-            <p class="signup-link">Don't have an account? <a href="{{ url_for('return_signup') }}">Sign Up</a></p>
-        </form>
+        </div>
     </div>
+    <script>
+        document.getElementById("loginButton").addEventListener("click", function() {
+            var email = document.querySelector('input[name="email"]').value;
+            var password = document.querySelector('input[type="password"]').value;
+            
+            if (!email) {
+                alert("Email is required");
+                return;
+            }
+            
+            if (!password) {
+                alert("Password is required");
+                return;
+            }
+            
+            // Redirect the user to AIchatbot.html
+            window.location.href = "AIchatbot.html";
+        });
+    </script>
 </body>
 </html>
