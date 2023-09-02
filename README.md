@@ -3,9 +3,12 @@ A4AF is a web-based tool designed to assist individuals interested in commencing
 
 ## Structure
 auth\
-  auth: Cointains basic authentication class
+  auth.py: Cointains basic authentication implementation.
+  
 models\: key components of our project: ChatGPT, PestDetection, VideoRecomender, and Storage classes. These elements enable us to offer each user a distinct experience, with a special focus on ChatGPT and VideoRecomender, which deliver personalized content based on user profiles.
+
 static\ and templates\: Here, you will find the frontend code for the A4AF platform, implemented using HTML, CSS, and JavaScript files for the user interface.
+
 views\: This directory houses blueprints, allowing us to effectively structure and manage our routes.
 
 ## Purpose
