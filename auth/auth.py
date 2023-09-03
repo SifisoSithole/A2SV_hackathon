@@ -1,4 +1,5 @@
 from models.db import Storage
+from flask import request, session
 from functools import wraps
 import bcrypt
 
@@ -49,3 +50,5 @@ class AuthManager:
 
     def _verify_password(self, password, hashed_password):
         return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
+
+

@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify, session, redirect, url_for, make_resp
 from auth.auth import AuthManager
 import uuid
 from views import auth_views
+from models.db import Storage
 
 auth_manager = AuthManager()
+
 
 @auth_views.route('/signup', methods=['POST'])
 def signup():
@@ -33,11 +35,13 @@ def login():
             # Create a session ID (you can use a UUID, for example)
             session_id = str(uuid.uuid4())
 
+
+
             # Store the session ID in the session dictionary with the user ID
             session[session_id] = user['_id']
-
+            new_route_url = url_for('chatbot_page')
             # Create a response and set a cookie with the session ID
-            response = make_response(jsonify({'message': 'Login successful'}), 200)
+            response = make_response(redirect(new_route_url))
             response.set_cookie('session_id', session_id)
 
             return response

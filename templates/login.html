@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Webpage Design</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <style>
         * {
             margin: 0;
@@ -26,43 +26,17 @@
         </div>
         <div class="content">
             <h1><br></h1>
-            <div class="form">
+            <form method="POST" action="{{ url_for('auth_views.login') }}" class="form">
                 <h2>Login Here</h2>
-                <input type="email" name="email" placeholder="Enter Email Here">
-                <input type="password" name="" placeholder="Enter Password Here">
-                <button class="btnn" id="loginButton">Login</button>
+                <input type="email" name="email" placeholder="Enter Email Here" required>
+                <input type="password" name="password" placeholder="Enter Password Here" required>
+                <input type="submit" class="btnn" id="loginButton">
                 <p class="link">Don't have an account<br>
-                    <a href="#" target="_blank">Sign up</a> here</a>
+                    <a href="{{ url_for('return_signup')}}">Sign up</a> here</a>
                 </p>
-                <p class="liw">Log in with</p>
-                <div class="icons">
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-    <script>
-        document.getElementById("loginButton").addEventListener("click", function() {
-            var email = document.querySelector('input[name="email"]').value;
-            var password = document.querySelector('input[type="password"]').value;
-            
-            if (!email) {
-                alert("Email is required");
-                return;
-            }
-            
-            if (!password) {
-                alert("Password is required");
-                return;
-            }
-            
-            // Redirect the user to AIchatbot.html
-            window.location.href = "AIchatbot.html";
-        });
-    </script>
+    
 </body>
 </html>

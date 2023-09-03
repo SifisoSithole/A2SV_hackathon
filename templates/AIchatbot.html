@@ -2,7 +2,8 @@
     <html>
     <head>
     <title>Chatbot</title>
-    <link rel="stylesheet" type="text/css" href="AIchatbot.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='AIchatbot.css') }}">
+    <script src="{{ url_for('static', filename='AIchatbot.js') }}" defer></script>
     <style>
     body {
       font-family: "Open Sans", sans-serif;
@@ -150,7 +151,7 @@
     
     .upload-container {
       position: absolute;
-      top: 20%;
+      top: 25%;
       right: 26px;
       transform: translateY(-50%);
       display: flex;
@@ -202,16 +203,17 @@
         <div id="chat-window"></div>
         <form id="chat-form">
           <input type="text" id="chat-input" autocomplete="off" placeholder="Type your message here" required />
-          <button type="submit">Send</button>
+          <button id="submit">Send</button>
         </form>
         <div class="upload-container">
-          <input type="file" id="upload-input" accept="image/*" />
-          <label for="upload-input">Upload Picture</label>
+          <form action="{{ url_for('pest_detection_views.pest_detection') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" id="upload-input" accept="image/*" />
+            <label for="upload-input">Upload Picture</label>
+          </form>
         </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
-    <script src="app.js"></script>
     <script>
       var videos = [
         "https://www.youtube.com/embed/3JigXb9KXqI",
@@ -249,7 +251,6 @@
         }
       });
     </script>
-    <script>AIchatbot.js</script>
 
     </body>
     </html>

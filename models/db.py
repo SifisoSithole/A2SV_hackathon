@@ -9,7 +9,6 @@ from typing import Dict, Any, List
 import uuid
 from os import environ
 
-
 class Storage:
     """
     A class for storing and managing data.
@@ -110,4 +109,3 @@ class Storage:
         return result.acknowledged
 
  
-
